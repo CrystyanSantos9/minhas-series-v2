@@ -7,7 +7,7 @@ const pagesRoutes = require('./routes/pages')
 const seriesRoutes = require('./routes/series')
 
 const PORT = process.env.PORT || 3000
-const mongoStringConnection = process.env.MONGODB || 'mongodb://localhost/minhas-series-v2'
+const mongoStringConnection = process.env.NODE_ENV=== 'development' || process.env.NODE_ENV=== 'docker'  ?  'mongodb://mongodb/minhas-series-v2' : process.env.MONGODB 
 //Pegar informações do sistema
 const os = require('os')
 //pegar o hostname

@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app:
+    build: .
+    environment:
+      NODE_ENV: docker
+    command: node_modules/.bin/nodemon --exec yarn start
+    tty: true
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    volumes:
+       - .:/home/app/node_docker
+       - /home/app/node_docker/node_modules
+       
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - "$PWD/apps/mongo:/data/db"
+      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+
+
+
